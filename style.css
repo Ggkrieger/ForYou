@@ -1,0 +1,99 @@
+/* style.css */
+
+/* Estilos para o corpo da página */
+body {
+    display: flex; /* Habilita Flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+    margin: 0; /* Remove margem padrão do body */
+    background-color: #000000; /* Um fundo rosado suave */
+    font-family: 'Inter', sans-serif; /* Usa a fonte Inter */
+    overflow: hidden; /* Evita barras de rolagem desnecessárias */
+    position: relative; /* Necessário para o z-index do canvas funcionar corretamente */
+}
+
+/* Estilos para o Canvas do efeito Matrix */
+#matrixCanvas {
+    position: fixed; /* Fixa o canvas na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca o canvas atrás de todo o outro conteúdo */
+}
+
+/* Contêiner para o coração, ajuda no posicionamento relativo do texto */
+.heart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necessário para posicionar o texto absolutamente dentro dele */
+    width: 200px; /* Largura base para o coração */
+    height: 200px; /* Altura base para o coração */
+    z-index: 0; /* Garante que o coração fique acima do canvas */
+}
+
+/* O elemento principal que forma a base do coração */
+.heart {
+    position: relative;
+    width: 100px; /* Largura do quadrado base do coração */
+    height: 90px; /* Altura do quadrado base do coração */
+    background-color: #e91e63; /* Cor vermelha vibrante para o coração */
+    transform: rotate(-45deg); /* Gira o quadrado para formar a ponta inferior do coração */
+    border-radius: 0 0 0 0; /* Inicializa com bordas quadradas */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+    animation: pulse 1.5s infinite ease-in-out; /* Aplica a animação de pulsar */
+}
+
+/* Pseudo-elemento ::before para a parte superior esquerda do coração */
+.heart::before,
+.heart::after {
+    content: ''; /* Conteúdo vazio é necessário para pseudo-elementos */
+    position: absolute; /* Posicionamento absoluto em relação ao .heart */
+    width: 100px; /* Largura dos círculos */
+    height: 90px; /* Altura dos círculos */
+    background-color: #e91e63; /* Mesma cor do coração */
+    border-radius: 50%; /* Transforma em círculos */
+}
+
+/* Posiciona o círculo superior esquerdo */
+.heart::before {
+    top: -45px; /* Move para cima */
+    left: 0; /* Alinha à esquerda */
+}
+
+/* Posiciona o círculo superior direito */
+.heart::after {
+    left: 45px; /* Move para a direita */
+    top: 0; /* Alinha ao topo */
+}
+
+/* Estilos para o texto "Eu te amo" */
+.text {
+    position: absolute; /* Posicionamento absoluto em relação ao .heart-container */
+    top: 50%; /* Alinha o topo do texto ao centro vertical do contêiner */
+    left: 50%; /* Alinha o lado esquerdo do texto ao centro horizontal do contêiner */
+    /* Ajusta o texto para que seu próprio centro fique no centro do contêiner e remove a rotação do pai */
+    transform: translate(-50%, -50%) rotate(45deg);
+    color: white; /* Cor do texto */
+    font-size: 1.8em; /* Tamanho da fonte do texto */
+    font-weight: bold; /* Negrito */
+    text-align: center; /* Centraliza o texto dentro do seu próprio span */
+    z-index: 1; /* Garante que o texto fique acima do coração */
+    width: 100%; /* Ocupa a largura total do contêiner para centralização */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Sombra no texto para melhor legibilidade */
+}
+
+/* Definição da animação de pulsar */
+@keyframes pulse {
+    0% {
+        transform: rotate(-45deg) scale(1); /* Estado inicial: tamanho normal */
+    }
+    50% {
+        transform: rotate(-45deg) scale(1.05); /* Aumenta ligeiramente o tamanho */
+    }
+    100% {
+        transform: rotate(-45deg) scale(1); /* Volta ao tamanho normal */
+    }
+}
